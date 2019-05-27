@@ -1,0 +1,12 @@
+#!/bin/sh
+
+CARDS='headphone pacmd set-default-sink 1\nspeaker pacmd set-default-sink 2'
+
+# print the selection
+SEL=$(printf "$CARDS" | awk '{print $1}' | dmenu) 
+
+# get the command
+CMD=$(printf "$CARDS" | grep "$SEL" | awk '{$1="";print}')
+
+# exec the command
+eval "$CMD"

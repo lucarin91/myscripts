@@ -1,0 +1,8 @@
+#!/bin/sh
+# A recursive dmenu menu.
+# Copyright 2010-2013 Tom Vincent <http://tlvince.com/contact/>
+
+prefix="dmenu_"
+cmd="$(dmenu_path | grep "$prefix" | grep -Ev "_menu|_path" | \
+       sed "s/$prefix//" | dmenu "$@")"
+[ "$cmd" ] && "${SHELL:-/bin/sh}" -c "${prefix}$cmd &" &

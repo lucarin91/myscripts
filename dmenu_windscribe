@@ -1,0 +1,8 @@
+#!/bin/sh
+
+cmd=$(printf "connect best\nconnect gb-n\ndisconnect\nstatus" | dmenu -p "command")
+
+res=$(windscribe $cmd | tail -n 1)
+
+notify-send "Windscribe" "$res"
+
