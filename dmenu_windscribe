@@ -1,8 +1,16 @@
 #!/bin/sh
+set -e
 
-cmd=$(printf "connect best\nconnect gb-n\ndisconnect\nstatus" | dmenu -p "command")
+# TODO: add cache
+locations=$(windscribe locations | tail -n+2 | cut -c 17-20 | sort -u)
 
-res=$(windscribe $cmd | tail -n 1)
+cmd=$(printf "$locations\nbest\ndisconnect\nstatus" | dmenu -i -p "command")
+
+if [ "$cmd" = "disconnect" ] || [ "$cmd" = "status" ] ; then
+    res=$(windscribe $cmd | tail -n 1)
+else
+    res=$(windscribe connect $cmd | tail -n 1)
+fi
 
 notify-send "Windscribe" "$res"
 
