@@ -1,8 +1,15 @@
 #!/bin/sh
 set -e
 
-# TODO: add cache
-locations=$(windscribe locations | tail -n+2 | cut -c 17-20 | sort -u)
+# manage locations cache to improve performance
+cachedir="$HOME/.cache"
+cache="$cachedir/windscribe_locations"
+[ ! -e "$cachedir" ] && mkdir -p "$cachedir"
+if ! locations=$(cat "$cache") ; then
+    echo "no cache"
+    locations=$(windscribe locations | tail -n+2 | cut -c 17-20 | sort -u)
+    echo "$locations" > "$cache"
+fi
 
 cmd=$(printf "$locations\nbest\ndisconnect\nstatus" | dmenu -i -p "command")
 
