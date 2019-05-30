@@ -1,12 +1,19 @@
 #!/bin/sh
-set -e
 
 TITLE="Bitwarden"
 CLEAR_TIME=10
 
-# dmenu prompt
-pass=$(bw list items | grep -Eo '"name":"[^\"]+"' | awk -F: -F\" '{print $4}' | dmenu -i | xargs bw get password)
-if [ $? -ne 0 ] ; then
+# generate a list login service with id and name
+list=$(bw list items \
+      | grep  -Eo '"id":"[^"]+"[^}]+"type":1[^}]+"name":"[^"]+"' \
+      | sed 's/"id":"\([^"]*\)".*"name":"\([^"]*\)".*/\1\t\2/')
+
+# select service id with dmenu
+name=$(printf "$list" | awk -F'\t' '{print $2}' | dmenu -i)
+id=$(printf "$list" | grep "$name" | head -n1 | awk -F'\t' '{print $1}')
+
+# get password
+if ! pass=$(bw get password "$id") ; then
   notify-send "$TITLE" "fail"
   exit 1
 fi
@@ -16,5 +23,6 @@ printf "$pass" | xclip -selection clipboard
 notify-send "$TITLE" "password copy"
 
 # clear clipboard after 10 seconds
-sh -c "sleep \"$CLEAR_TIME\" ; printf \"\" | xclip -selection clipboard ; notify-send \"$TITLE\" \"clipboard clear\""&
+sh -c "sleep \"$CLEAR_TIME\" ; printf \"\" | xclip -selection clipboard ;\
+       notify-send \"$TITLE\" \"clipboard clear\""&
 
