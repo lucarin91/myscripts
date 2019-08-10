@@ -7,11 +7,11 @@ cache="$cachedir/windscribe_locations"
 [ ! -e "$cachedir" ] && mkdir -p "$cachedir"
 if ! locations=$(cat "$cache") ; then
     echo "no cache"
-    locations=$(windscribe locations | tail -n+2 | cut -c 17-20 | sort -u)
+    locations=$(windscribe locations | tail -n+2 | cut -c 23-27 | sort -u)
     echo "$locations" > "$cache"
 fi
 
-cmd=$(printf "$locations\nbest\ndisconnect\nstatus" | dmenu -i -p "command")
+cmd=$(printf "best\ndisconnect\nstatus\n$locations" | dmenu -i -p "command")
 
 if [ "$cmd" = "disconnect" ] || [ "$cmd" = "status" ] ; then
     res=$(windscribe $cmd | tail -n 1)
