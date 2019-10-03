@@ -1,0 +1,12 @@
+#!/bin/sh
+
+TITLE="Redshift"
+
+process="$(ps aux | grep 'redshift' | grep -v grep | grep -v dmenu | awk '{print $2}')"
+if [ -z "$process" ] ; then
+    redshift&
+    notify-send "$TITLE" "start"
+else
+    killall redshift
+    notify-send "$TITLE" "stop"
+fi
