@@ -1,0 +1,7 @@
+#!/bin/sh
+
+TITLE="Wakenas"
+
+r=$(wakeonlan "$NAS_MAC" 2>&1)
+
+notify-send "$TITLE" "$r"
