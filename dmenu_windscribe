@@ -20,4 +20,3 @@ else
 fi
 
 notify-send "Windscribe" "$res"
-
