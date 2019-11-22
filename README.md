@@ -8,7 +8,7 @@ Implemented scripts:
 
 - `bw`, an interface to [Bitwarden](https://bitwarden.com/) it required `bw` command
 - `redshift`, an interface to [RedShift](http://jonls.dk/redshift/) it required `redshift` command
-- `windscribe`, an interface to [Windscribe](https://windscribe.com/) VPN it required `windscribe`, command
+- `windscribe`, an interface to [Windscribe](https://windscribe.com/) VPN it required `windscribe` command
 - `surfshark`, an interface to [Surfshark](https://surfshark.com/) VPN it required `surfshark-vpn` command
 - `wakenas`, send the WakeOnLan magic packet using the `$NAS_MAC` environment variable
 
