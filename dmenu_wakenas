@@ -1,7 +1,5 @@
 #!/bin/sh
 
-TITLE="Wakenas"
+res=$(wakeonlan "$NAS_MAC" 2>&1)
 
-r=$(wakeonlan "$NAS_MAC" 2>&1)
-
-notify-send "$TITLE" "$r"
+notify-send "Wakenas" "$res"
