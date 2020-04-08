@@ -4,5 +4,4 @@ set -e
 cmd=$(printf "attack\ndown\nstatus" | dmenu -i -p "command")
 
 res=$(echo "" | sudo surfshark-vpn $cmd | tail -n 3)
-
 notify-send "Surfshark" "$res"

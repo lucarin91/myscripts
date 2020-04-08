@@ -1,5 +1,4 @@
 #!/bin/sh
 
 res=$(wakeonlan "$NAS_MAC" 2>&1)
-
 notify-send "Wakenas" "$res"
