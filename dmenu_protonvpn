@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+
+cmd=$(printf "connect\ndisconnect\nreconnect\nstatus" | dmenu -i -p "command")
+[ "$cmd" = "connect" ] && cmd="$cmd -f"
+
+res=$(sudo protonvpn $cmd | tail -n3)
+notify-send "ProtonVPN" "$res"

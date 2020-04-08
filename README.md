@@ -6,10 +6,11 @@ To run it starts the selector menu using the `dmenu_menu` script. It is suggeste
 
 Implemented scripts:
 
-- `bw`, an interface to [Bitwarden](https://bitwarden.com/) it required `bw` command
-- `redshift`, an interface to [RedShift](http://jonls.dk/redshift/) it required `redshift` command
-- `windscribe`, an interface to [Windscribe](https://windscribe.com/) VPN it required `windscribe` command
-- `surfshark`, an interface to [Surfshark](https://surfshark.com/) VPN it required `surfshark-vpn` command
+- `bw`, an interface to [Bitwarden](https://bitwarden.com/), requires `bw` command
+- `redshift`, an interface to [RedShift](http://jonls.dk/redshift/), requires `redshift` command
+- `windscribe`, an interface to [Windscribe](https://windscribe.com/) VPN, requires `windscribe` command
+- `surfshark`, an interface to [Surfshark](https://surfshark.com/) VPN, requires `surfshark-vpn` command
+- `protonvpn`, an interface to [ProtonVPN](https://protonvpn.com/), requires `protonvpn` command
 - `wakenas`, send the WakeOnLan magic packet using the `$NAS_MAC` environment variable
 
 ## Installation
