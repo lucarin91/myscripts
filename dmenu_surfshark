@@ -1,7 +1,13 @@
 #!/bin/sh
 set -e
 
-cmd=$(printf "attack\ndown\nstatus" | dmenu -i -p "command")
+TITLE="Surfshark"
+
+cmd=$(printf "attack\ndown\nreset\nstatus" | dmenu -i -p "command")
+
+[ "$cmd" = "reset" ] && cmd=attack\
+                     && sudo surfshark-vpn down > /dev/null
 
 res=$(echo "" | sudo surfshark-vpn $cmd | tail -n 3)
-notify-send "Surfshark" "$res"
+
+notify-send "$TITLE" "$res"
