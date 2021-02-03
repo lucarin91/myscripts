@@ -1,0 +1,8 @@
+#!/bin/sh
+
+prjs=$(cd "$HOME" && find . -maxdepth 4 -iname ".git" -type d ! -path "./.*")
+prjs=$(printf "$prjs" | sed -n '/go/! s/\/.git//p') # remove .git at the end
+
+prj=$(printf "$prjs" | dmenu -i -p "project")
+
+[ -n "$prj" ] && code "$prj"
