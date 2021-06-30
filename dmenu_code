@@ -1,9 +1,11 @@
 #!/bin/sh
 
+DMENU="dmenu -i -m 0"
+
 prjs=$(cd "$HOME" && find . -maxdepth 4 -iname ".git" -type d ! -path "./.*" -exec ls -t "{}" +)
 prjs=$(printf "$prjs" | sed -n '/go/! s/\/.git://p') # remove .git at the end
 
 workspace=$(cd "$HOME" && find . -maxdepth 4 -name "*.code-workspace" -type f -exec ls -t "{}" +)
 
-prj=$(printf "$prjs\n$workspace" | dmenu -i -p "project")
-[ -n "$prj" ] && code "$prj"
+prj=$(printf "$prjs\n$workspace" | $DMENU -p "project")
+[ -n "$prj" ] && cd "$HOME" && code "$prj"

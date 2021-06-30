@@ -2,6 +2,7 @@
 
 TITLE="Bitwarden"
 CLEAR_TIME=10
+DMENU="dmenu -i -m 0"
 
 # sync new passwords
 sh -c "bw sync > /dev/null"&
@@ -12,7 +13,7 @@ list=$(bw list items \
       | sed 's/"id":"\([^"]*\)".*"name":"\([^"]*\)".*/\1\t\2/')
 
 # select service id with dmenu
-name=$(printf "$list" | awk -F'\t' '{print $2}' | dmenu -i)
+name=$(printf "$list" | awk -F'\t' '{print $2}' | $DMENU)
 if [ -z "$name" ] ; then
   exit 1
 fi

@@ -1,6 +1,8 @@
 #!/bin/sh
 set -e
 
+DMENU="dmenu -i -m 0"
+
 # manage locations cache to improve performance
 cachedir="$HOME/.cache"
 cache="$cachedir/windscribe_locations"
@@ -11,7 +13,7 @@ if ! locations=$(cat "$cache") ; then
     echo "$locations" > "$cache"
 fi
 
-cmd=$(printf "best\ndisconnect\nstatus\n$locations" | dmenu -i -p "command")
+cmd=$(printf "best\ndisconnect\nstatus\n$locations" | $DMENU -p "command")
 
 if [ "$cmd" = "disconnect" ] || [ "$cmd" = "status" ] ; then
     res=$(windscribe $cmd | tail -n 1)

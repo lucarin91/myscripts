@@ -1,7 +1,9 @@
 #!/bin/sh
 set -e
 
-cmd=$(printf "connect\ndisconnect\nreconnect\nstatus" | dmenu -i -p "command")
+DMENU="dmenu -i -m 0"
+
+cmd=$(printf "connect\ndisconnect\nreconnect\nstatus" | $DMENU -p "command")
 [ "$cmd" = "connect" ] && cmd="$cmd -f"
 
 res=$(sudo protonvpn $cmd | tail -n3)
