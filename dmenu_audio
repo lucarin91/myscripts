@@ -1,0 +1,16 @@
+#!/bin/sh
+TITLE="Audio"
+DMENU="dmenu -i -m 0"
+
+cards=$(pacmd list-sinks | grep device.profile.name | cut -d"=" -f2 | sed 's/\s//g' | sed 's/\"//g')
+sel=$(printf "$cards" | $DMENU)
+
+idx=$(printf "$cards" | grep -n $sel | cut -d':' -f1)
+sink=$(pacmd list-sinks | grep index | head -n$idx | tail -n1 | cut -d':' -f2)
+
+err=$(pacmd set-default-sink $sink)
+if [ -z "$err" ] ; then
+    notify-send "$TITLE" "sink set to $sel"
+else
+    notify-send "$TITLE" "error: $err"
+fi
